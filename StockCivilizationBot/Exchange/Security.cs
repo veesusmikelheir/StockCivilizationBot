@@ -14,7 +14,8 @@ namespace StockCivilizationBot.Exchange
         public static readonly Security NOTHING = new Security(-1) { SecurityName = "Nothing" };
 
         public Identifier SecurityID { get; }
-
+        public string ShortName { get; }
+        public string ReadableName { get; }
 
         public Security(Identifier securityID)
         {

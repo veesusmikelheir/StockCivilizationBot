@@ -6,12 +6,23 @@ using System.Threading.Tasks;
 
 namespace StockCivilizationBot.Exchange
 {
+    /// <summary>
+    /// Collection wrapper for accounts
+    /// </summary>
     public class Accounts : IdentifierSupplier
     {
         Dictionary<Identifier, Account> accountsDictionary = new Dictionary<Identifier, Account>();
         Dictionary<string, Account> shortNameToAccounts = new Dictionary<string, Account>();
 
-
+        public void LoadAccounts(IEnumerable<Account> accounts)
+        {
+            ResetHighestIdentifier();
+            ClearAccounts();
+            foreach(var v in accounts)
+            {
+                AddAccount(v);
+            }
+        }
 
         public Account Get(Identifier identifier)
         {
@@ -25,6 +36,23 @@ namespace StockCivilizationBot.Exchange
             return null;
         }
 
+        public void ClearAccounts()
+        {
+            accountsDictionary.Clear();
+            shortNameToAccounts.Clear();
+        }
 
+        public bool AddAccount(Account account)
+        {
+            if (accountsDictionary.ContainsKey(account.AccountID) || shortNameToAccounts.ContainsKey(account.ShortName)) return false;
+
+            accountsDictionary.Add(account.AccountID, account);
+            shortNameToAccounts.Add(account.ShortName, account);
+
+            MaybeReplaceHighestIdentifier(account.AccountID);
+            return true;
+        }
+
+        
     }
 }

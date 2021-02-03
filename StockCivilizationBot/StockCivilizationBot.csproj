@@ -96,7 +96,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Exchange\Account.cs" />
+    <Compile Include="Exchange\Accounts.cs" />
     <Compile Include="Exchange\Identifier.cs" />
+    <Compile Include="Exchange\IdentifierSupplier.cs" />
     <Compile Include="Exchange\Portfolio.cs" />
     <Compile Include="Exchange\Security.cs" />
     <Compile Include="Exchange\Transaction.cs" />
