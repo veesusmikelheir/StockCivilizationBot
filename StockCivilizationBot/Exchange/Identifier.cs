@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace StockCivilizationBot.Economy
+namespace StockCivilizationBot.Exchange
 {
     /// <summary>
     /// class that abstracts the idea of an identifier in case integers dont cut it later on 

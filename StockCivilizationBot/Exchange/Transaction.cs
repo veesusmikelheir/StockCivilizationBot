@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StockCivilizationBot.Economy
+namespace StockCivilizationBot.Exchange
 {
     /// <summary>
     /// Represents a transaction between two accounts
@@ -18,10 +18,6 @@ namespace StockCivilizationBot.Economy
     {
         public Identifier TransactionID { get; }
 
-        public Transaction(Identifier transactionID)
-        {
-            TransactionID = transactionID;
-        }
         /// <summary>
         /// Account traded security is being withdrawn from, and backing security is being deposited into
         /// </summary>
@@ -46,5 +42,18 @@ namespace StockCivilizationBot.Economy
         /// Amount of the secondary security being deposited into source account and withdrawn from target account
         /// </summary>
         public BigRational BackingSecurityAmount { get; }
+
+        public Transaction(Identifier transactionID, Account source, Account target, Security tradedSecurity, BigRational tradedSecurityAmount, Security backingSecurity, BigRational backingSecurityAmount)
+        {
+            TransactionID = transactionID;
+            Source = source;
+            Target = target;
+            TradedSecurity = tradedSecurity;
+            TradedSecurityAmount = tradedSecurityAmount;
+            BackingSecurity = backingSecurity;
+            BackingSecurityAmount = backingSecurityAmount;
+        }
+
+        
     }
 }

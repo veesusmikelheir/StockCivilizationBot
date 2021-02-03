@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace StockCivilizationBot.Economy
+namespace StockCivilizationBot.Exchange
 {
     /// <summary>
     /// Represents a collection of securities

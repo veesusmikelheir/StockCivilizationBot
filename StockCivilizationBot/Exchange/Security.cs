@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StockCivilizationBot.Economy
+namespace StockCivilizationBot.Exchange
 {
     /// <summary>
     /// An entity exchangeable between accounts
