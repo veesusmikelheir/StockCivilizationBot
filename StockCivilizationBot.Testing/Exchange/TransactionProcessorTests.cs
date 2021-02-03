@@ -30,7 +30,7 @@ namespace StockCivilizationBot.Testing.Exchange
             source.Portfolio.ForceTransact(security1, new BigRational(10));
             target = new Account(2);
             target.Portfolio.ForceTransact(security2, new BigRational(10));
-            TestTransaction = new Transaction(processor.Transactions.GetNextTransactionIdentifier(), source, target, security1, new BigRational(10), security2, new BigRational(10));
+            TestTransaction = new Transaction(processor.Transactions.GetNextIdentifier(), source, target, security1, new BigRational(10), security2, new BigRational(10));
 
         }
 
@@ -49,7 +49,7 @@ namespace StockCivilizationBot.Testing.Exchange
         [Test]
         public void TransactionProcessorInvalidBackingTransactionTest()
         {
-            var testTransaction = new Transaction(processor.Transactions.GetNextTransactionIdentifier(), source, target, security1, new BigRational(10), security2, new BigRational(20));
+            var testTransaction = new Transaction(processor.Transactions.GetNextIdentifier(), source, target, security1, new BigRational(10), security2, new BigRational(20));
             Assert.IsFalse(processor.TryProcessTransaction(testTransaction));
             Assert.AreEqual(source.Portfolio.Get(security2), BigRational.Zero);
             Assert.AreEqual(target.Portfolio.Get(security1), BigRational.Zero);
@@ -59,7 +59,7 @@ namespace StockCivilizationBot.Testing.Exchange
         [Test]
         public void TransactionProcessorInvalidTradedTransactionTest()
         {
-            var testTransaction = new Transaction(processor.Transactions.GetNextTransactionIdentifier(), source, target, security1, new BigRational(20), security2, new BigRational(10));
+            var testTransaction = new Transaction(processor.Transactions.GetNextIdentifier(), source, target, security1, new BigRational(20), security2, new BigRational(10));
             Assert.IsFalse(processor.TryProcessTransaction(testTransaction));
             Assert.AreEqual(source.Portfolio.Get(security2), BigRational.Zero);
             Assert.AreEqual(target.Portfolio.Get(security1), BigRational.Zero);

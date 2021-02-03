@@ -6,8 +6,25 @@ using System.Threading.Tasks;
 
 namespace StockCivilizationBot.Exchange
 {
-    public class Accounts
+    public class Accounts : IdentifierSupplier
     {
-        public 
+        Dictionary<Identifier, Account> accountsDictionary = new Dictionary<Identifier, Account>();
+        Dictionary<string, Account> shortNameToAccounts = new Dictionary<string, Account>();
+
+
+
+        public Account Get(Identifier identifier)
+        {
+            if (accountsDictionary.TryGetValue(identifier, out var account)) return account;
+            return null;
+        }
+
+        public Account Get(string shortName)
+        {
+            if (shortNameToAccounts.TryGetValue(shortName, out var account)) return account;
+            return null;
+        }
+
+
     }
 }
