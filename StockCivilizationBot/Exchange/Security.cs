@@ -49,12 +49,17 @@ namespace StockCivilizationBot.Exchange
             return !(left == right);
         }
 
+
+    }
+
+    public static class SecurityExtensions
+    {
         // make it an extension so securities doesnt need to care about how to initialize a security properly
-        public static Security GetOrCreateSecurity(this Securities accounts, string name, string shortName)
+        public static Security GetOrCreateSecurity(this Securities securities, string name, string shortName)
         {
-            Account account = new Account(accounts.GetNextIdentifier()) { ReadableName = name, ShortName = shortName };
-            if (!accounts.AddAccount(account)) return accounts.Get(shortName);
-            return account;
+            Security security = new Security(securities.GetNextIdentifier(), shortName, name);
+            if (!securities.AddSecurity(security)) return securities.Get(shortName);
+            return security;
         }
     }
 }
