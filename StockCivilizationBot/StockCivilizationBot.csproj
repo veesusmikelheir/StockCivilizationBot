@@ -97,6 +97,7 @@
     <Compile Include="Economy\Identifier.cs" />
     <Compile Include="Economy\Portfolio.cs" />
     <Compile Include="Economy\Security.cs" />
+    <Compile Include="Economy\Transaction.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

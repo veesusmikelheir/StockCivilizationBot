@@ -1,4 +1,5 @@
 ﻿using ExtendedNumerics;
+using System;
 using System.Collections.Generic;
 
 namespace StockCivilizationBot.Economy
@@ -41,7 +42,7 @@ namespace StockCivilizationBot.Economy
         }
 
         /// <summary>
-        /// Checks to make sure an amount can be successfully be transacted from this portfolio
+        /// Checks to make sure an amount can be successfully be transacted to or from this portfolio
         /// Negative numbers for withdrawals and positive numbers for deposits
         /// </summary>
         /// <param name="security"></param>
@@ -64,6 +65,22 @@ namespace StockCivilizationBot.Economy
             amountAfter = Get(security);
             if (!Validate(security, amount)) return false;
             amountAfter = Transact(security, amount);
+            return true;
+        }
+
+        public static bool TryTrade(Security security, Portfolio source, Portfolio target, BigRational amount, out BigRational sourceNew,out BigRational targetNew)
+        {
+            if (amount < BigRational.Zero) throw new ArgumentException("Must be greater than zero (swap source and target)", "amount");
+            targetNew = target.Get(security); // so if source transaction fails targetnew isnt null
+            // if the source is denying the transaction then we can end the whole thing without much harm
+            if (!source.AttemptTransact(security, BigRational.Negate(amount), out sourceNew)) return false;
+            // if the target is denying the transaction then we need to rollback the state 
+            if(!target.AttemptTransact(security,amount,out targetNew))
+            {
+                // naive rollback
+                // dont bother checking if its valid, we need to force this through
+                sourceNew = target.Transact(security, amount);
+            }
             return true;
         }
     }
