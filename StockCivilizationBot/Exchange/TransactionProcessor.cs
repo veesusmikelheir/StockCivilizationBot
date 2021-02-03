@@ -8,6 +8,6 @@ namespace StockCivilizationBot.Exchange
 {
     public class TransactionProcessor
     {
-        public TransactionLog Transactions;
+        public TransactionLog Transactions = new TransactionLog();
     }
 }

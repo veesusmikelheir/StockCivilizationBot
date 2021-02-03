@@ -100,6 +100,7 @@
     <Compile Include="Exchange\Portfolio.cs" />
     <Compile Include="Exchange\Security.cs" />
     <Compile Include="Exchange\Transaction.cs" />
+    <Compile Include="Exchange\TransactionLog.cs" />
     <Compile Include="Exchange\TransactionProcessor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

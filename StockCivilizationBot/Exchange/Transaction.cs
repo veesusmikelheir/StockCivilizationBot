@@ -54,6 +54,25 @@ namespace StockCivilizationBot.Exchange
             BackingSecurityAmount = backingSecurityAmount;
         }
 
-        
+        public override bool Equals(object obj)
+        {
+            return obj is Transaction transaction &&
+                   EqualityComparer<Identifier>.Default.Equals(TransactionID, transaction.TransactionID);
+        }
+
+        public override int GetHashCode()
+        {
+            return TransactionID.GetHashCode();
+        }
+
+        public static bool operator ==(Transaction left, Transaction right)
+        {
+            return EqualityComparer<Transaction>.Default.Equals(left, right);
+        }
+
+        public static bool operator !=(Transaction left, Transaction right)
+        {
+            return !(left == right);
+        }
     }
 }
