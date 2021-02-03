@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ExtendedNumerics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,7 +18,19 @@ namespace StockCivilizationBot.Exchange
         public string ReadableName;
         public string ShortName;
 
-        public Portfolio Portfolio;
+        public Portfolio Portfolio = new Portfolio();
+
+        public bool ValidateTransactionAmount(Security security,BigRational rational)
+        {
+            return Portfolio.Validate(security, rational); 
+        }
+        
+        public bool IsTransactionAuthorized(Transaction transaction)
+        {
+            if (transaction.Source != this && transaction.Target != this) throw new Exception("This account has no bearing on this transaction");
+            // no validation logic yet, 
+            return true;
+        }
 
         public override bool Equals(object obj)
         {

@@ -8,7 +8,7 @@ namespace StockCivilizationBot.Exchange
     public class TransactionLog
     {
         HashSet<Transaction> Transactions = new HashSet<Transaction>();
-        Identifier highestFreeIdentifier; // stores the next unused identifier (as far as we know)
+        Identifier highestFreeIdentifier = new Identifier(0); // stores the next unused identifier (as far as we know)
 
         internal void ClearTransactions()
         {
@@ -41,7 +41,7 @@ namespace StockCivilizationBot.Exchange
 
             MaybeReplaceHighestIdentifier(transaction.TransactionID);
 
-            return false;
+            return true;
         }
 
         public Identifier GetNextTransactionIdentifier(bool increment = false)

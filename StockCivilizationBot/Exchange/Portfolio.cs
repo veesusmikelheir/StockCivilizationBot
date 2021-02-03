@@ -18,6 +18,12 @@ namespace StockCivilizationBot.Exchange
             AvailableSecurities = availableSecurities;
         }
 
+        public Portfolio()
+        {
+        }
+
+
+
         /// <summary>
         /// Gets the current amount of a given security
         /// </summary>
@@ -36,7 +42,7 @@ namespace StockCivilizationBot.Exchange
         /// </summary>
         /// <param name=""></param>
         /// <returns>New value for this security</returns>
-        public BigRational Transact(Security security,BigRational amount)
+        public BigRational ForceTransact(Security security,BigRational amount)
         {
             return AvailableSecurities[security] = BigRational.Add(Get(security), amount);
         }
@@ -64,7 +70,7 @@ namespace StockCivilizationBot.Exchange
         {
             amountAfter = Get(security);
             if (!Validate(security, amount)) return false;
-            amountAfter = Transact(security, amount);
+            amountAfter = ForceTransact(security, amount);
             return true;
         }
 
@@ -79,7 +85,25 @@ namespace StockCivilizationBot.Exchange
             {
                 // naive rollback
                 // dont bother checking if its valid, we need to force this through
-                sourceNew = target.Transact(security, amount);
+                sourceNew = target.ForceTransact(security, amount);
+            }
+            return true;
+        }
+        
+        internal static void ForceTrade(Security security, Portfolio source, Portfolio target, BigRational amount)
+        {
+            source.ForceTransact(security, BigRational.Negate(amount));
+            target.ForceTransact(security, amount);
+        }
+
+        public static bool TryTwoWayTrade(Portfolio source, Portfolio target, Security tradedSecurity,BigRational tradedSecurityAmount,Security backingSecurity, BigRational backingSecurityAmount)
+        {
+            
+            if (!TryTrade(backingSecurity, target, source, backingSecurityAmount, out var _, out var _)) return false;
+            if(!TryTrade(tradedSecurity, source, target, tradedSecurityAmount, out var _, out var _))
+            {
+                ForceTrade(backingSecurity, source, target, backingSecurityAmount);
+                return false;
             }
             return true;
         }
