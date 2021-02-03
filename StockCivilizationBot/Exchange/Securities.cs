@@ -48,5 +48,18 @@ namespace StockCivilizationBot.Exchange
             MaybeReplaceHighestIdentifier(account.SecurityID);
             return true;
         }
+
+        
+    }
+
+    public static class SecurityExtensions
+    {
+        // make it an extension so accounts doesnt need to care about how to initialize an account properly
+        public static Security GetOrCreateSecurity(this Securities securities, string name, string shortName)
+        {
+            Security security = new Security(securities.GetNextIdentifier(),name, shortName));
+            if (!securities.AddSecurity(security)) return securities.Get(shortName);
+            return security;
+        }
     }
 }

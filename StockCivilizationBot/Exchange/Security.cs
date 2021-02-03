@@ -11,7 +11,7 @@ namespace StockCivilizationBot.Exchange
     /// </summary>
     public class Security
     {
-        public static readonly Security NOTHING = new Security(-1) { SecurityName = "Nothing" };
+        public static readonly Security NOTHING = new Security(-1,"NIL", "Nothing");
 
         public Identifier SecurityID { get; }
         public string ShortName { get; }
@@ -22,7 +22,11 @@ namespace StockCivilizationBot.Exchange
             SecurityID = securityID;
         }
 
-        public string SecurityName;
+        public Security(Identifier securityID, string shortName, string readableName) : this(securityID)
+        {
+            ShortName = shortName;
+            ReadableName = readableName;
+        }
 
         public override bool Equals(object obj)
         {
@@ -43,6 +47,14 @@ namespace StockCivilizationBot.Exchange
         public static bool operator !=(Security left, Security right)
         {
             return !(left == right);
+        }
+
+        // make it an extension so securities doesnt need to care about how to initialize a security properly
+        public static Security GetOrCreateSecurity(this Securities accounts, string name, string shortName)
+        {
+            Account account = new Account(accounts.GetNextIdentifier()) { ReadableName = name, ShortName = shortName };
+            if (!accounts.AddAccount(account)) return accounts.Get(shortName);
+            return account;
         }
     }
 }

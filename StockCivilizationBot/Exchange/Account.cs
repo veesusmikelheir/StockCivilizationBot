@@ -52,5 +52,16 @@ namespace StockCivilizationBot.Exchange
         {
             return !(left == right);
         }
+
+    }
+    public static class AccountExtensions
+    {
+        // make it an extension so accounts doesnt need to care about how to initialize an account properly
+        public static Account GetOrCreateAccount(this Accounts accounts, string name, string shortName)
+        {
+            Account account = new Account(accounts.GetNextIdentifier()) { ReadableName = name, ShortName = shortName };
+            if (!accounts.AddAccount(account)) return accounts.Get(shortName);
+            return account;
+        }
     }
 }

@@ -41,5 +41,6 @@ namespace StockCivilizationBot.Exchange
         }
 
 
+
     }
 }
