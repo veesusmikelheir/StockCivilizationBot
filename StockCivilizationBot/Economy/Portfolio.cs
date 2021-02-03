@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace StockCivilizationBot.Economy
 {
+    /// <summary>
+    /// Represents a collection of securities
+    /// </summary>
     public class Portfolio
     {
         Dictionary<Security, BigRational> AvailableSecurities = new Dictionary<Security, BigRational>();
@@ -18,7 +21,7 @@ namespace StockCivilizationBot.Economy
         /// Gets the current amount of a given security
         /// </summary>
         /// <param name="security"></param>
-        /// <returns>Amount of given security</returns>
+        /// <returns>Amount of given security</returns> 
         public BigRational Get(Security security)
         {
             if (AvailableSecurities.TryGetValue(security, out var rational)) return rational;

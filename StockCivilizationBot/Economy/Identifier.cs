@@ -5,6 +5,9 @@ using System.Text;
 
 namespace StockCivilizationBot.Economy
 {
+    /// <summary>
+    /// class that abstracts the idea of an identifier in case integers dont cut it later on 
+    /// </summary>
     public struct Identifier
     {
         public int ID { get; }

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace StockCivilizationBot.Economy
 {
+    /// <summary>
+    /// An entity exchangeable between accounts
+    /// </summary>
     public class Security
     {
         public static readonly Security NOTHING = new Security(-1) { SecurityName = "Nothing" };
