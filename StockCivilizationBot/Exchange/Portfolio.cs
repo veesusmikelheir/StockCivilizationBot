@@ -70,7 +70,7 @@ namespace StockCivilizationBot.Exchange
 
         public static bool TryTrade(Security security, Portfolio source, Portfolio target, BigRational amount, out BigRational sourceNew,out BigRational targetNew)
         {
-            if (amount < BigRational.Zero) throw new ArgumentException("Must be greater than zero (swap source and target)", "amount");
+            if (amount < BigRational.Zero) throw new ArgumentOutOfRangeException("Must be greater than zero (swap source and target)", "amount");
             targetNew = target.Get(security); // so if source transaction fails targetnew isnt null
             // if the source is denying the transaction then we can end the whole thing without much harm
             if (!source.AttemptTransact(security, BigRational.Negate(amount), out sourceNew)) return false;

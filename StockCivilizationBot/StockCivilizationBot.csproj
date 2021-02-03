@@ -12,6 +12,8 @@
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -93,11 +95,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Economy\Account.cs" />
-    <Compile Include="Economy\Identifier.cs" />
-    <Compile Include="Economy\Portfolio.cs" />
-    <Compile Include="Economy\Security.cs" />
-    <Compile Include="Economy\Transaction.cs" />
+    <Compile Include="Exchange\Account.cs" />
+    <Compile Include="Exchange\Identifier.cs" />
+    <Compile Include="Exchange\Portfolio.cs" />
+    <Compile Include="Exchange\Security.cs" />
+    <Compile Include="Exchange\Transaction.cs" />
+    <Compile Include="Exchange\TransactionProcessor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
